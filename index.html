@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="다양한 JavaScript 라이브러리로 만든 30개의 인터랙티브 기능을 한곳에서 체험하는 쇼케이스">
+  <title>JS Playground 30</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="JS Playground 홈">
+      <span class="brand-mark">JS</span>
+      <span><strong>PLAYGROUND</strong><small>30 live experiments</small></span>
+    </a>
+    <nav aria-label="주요 메뉴">
+      <a href="#explore">실험실</a>
+      <a href="#about">소개</a>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="테마 전환">◐</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> BROWSER-BASED CREATIVE LAB</p>
+        <h1>작은 코드가<br><em>큰 경험</em>이 되는 곳.</h1>
+        <p class="hero-description">시각화, 데이터, 애니메이션, 사운드, 생산성까지. 20여 개의 JavaScript 라이브러리로 만든 30개 기능을 직접 만지고 비교해보세요.</p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#explore">30개 실험 시작 <span>↘</span></a>
+          <button class="secondary-btn" id="surpriseBtn" type="button">랜덤 실험</button>
+        </div>
+        <div class="hero-stats" aria-label="사이트 통계">
+          <div><strong>30</strong><span>INTERACTIONS</span></div>
+          <div><strong>20+</strong><span>LIBRARIES</span></div>
+          <div><strong>100%</strong><span>CLIENT SIDE</span></div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orbit orbit-one"><i></i></div>
+        <div class="orbit orbit-two"><i></i></div>
+        <div class="code-window">
+          <div class="window-bar"><span></span><span></span><span></span><b>playground.js</b></div>
+          <pre><code><span class="c-purple">const</span> idea = <span class="c-blue">await</span> imagine();
+
+<span class="c-purple">function</span> <span class="c-yellow">makeItReal</span>(idea) {
+  <span class="c-purple">return</span> idea
+    .map(<span class="c-blue">experiment</span>)
+    .filter(<span class="c-green">delight</span>)
+    .launch();
+}
+
+<span class="c-gray">// your turn ↓</span></code></pre>
+          <div class="terminal-line"><span>›</span> Ready to play <i></i></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="explore" id="explore">
+      <div class="section-heading">
+        <div><p class="eyebrow"><span></span> EXPLORE THE LAB</p><h2>오늘은 무엇을<br>만들어볼까요?</h2></div>
+        <p>카테고리를 고르거나 검색해서 원하는 실험을 찾아보세요. 모든 기능은 이 페이지 안에서 바로 실행됩니다.</p>
+      </div>
+
+      <div class="control-deck">
+        <label class="search-box">
+          <span>⌕</span>
+          <input id="demoSearch" type="search" placeholder="기능 또는 라이브러리 검색..." autocomplete="off">
+          <kbd>⌘ K</kbd>
+        </label>
+        <div class="filters" role="group" aria-label="카테고리 필터">
+          <button class="filter-btn active" data-filter="all" type="button">전체 <b>30</b></button>
+          <button class="filter-btn" data-filter="visual" type="button">비주얼</button>
+          <button class="filter-btn" data-filter="data" type="button">데이터</button>
+          <button class="filter-btn" data-filter="motion" type="button">모션</button>
+          <button class="filter-btn" data-filter="utility" type="button">유틸리티</button>
+          <button class="filter-btn" data-filter="creative" type="button">크리에이티브</button>
+        </div>
+      </div>
+
+      <p class="results-line"><span id="resultCount">30</span>개의 실험을 표시 중</p>
+
+      <div class="demo-grid" id="demoGrid">
+        <article class="demo-card wide featured" data-category="visual data" data-search="chart.js 실시간 라인 차트 데이터 시각화 그래프">
+          <div class="card-index">01</div><div class="card-head"><div><span class="category">DATA · VISUAL</span><h3>실시간 라인 차트</h3></div><span class="lib-badge">Chart.js</span></div>
+          <p>새 데이터를 추가하며 부드럽게 갱신되는 차트를 관찰하세요.</p>
+          <div class="demo-stage chart-stage"><canvas id="lineChart" aria-label="실시간 라인 차트"></canvas></div>
+          <button class="card-action" id="addChartData" type="button">데이터 추가 <span>＋</span></button>
+        </article>
+
+        <article class="demo-card" data-category="visual data" data-search="chart.js 도넛 차트 예산 시각화">
+          <div class="card-index">02</div><div class="card-head"><div><span class="category">DATA</span><h3>예산 도넛</h3></div><span class="lib-badge">Chart.js</span></div>
+          <p>슬라이더로 항목별 비중을 즉시 바꿔보세요.</p>
+          <div class="demo-stage donut-wrap"><canvas id="donutChart"></canvas></div>
+          <input id="budgetRange" type="range" min="10" max="80" value="42" aria-label="개발 예산 비중">
+        </article>
+
+        <article class="demo-card" data-category="utility" data-search="qrcode qr 코드 생성기">
+          <div class="card-index">03</div><div class="card-head"><div><span class="category">UTILITY</span><h3>QR 코드 생성기</h3></div><span class="lib-badge">QRCode.js</span></div>
+          <p>텍스트나 URL을 입력해 즉시 QR 코드로 바꿉니다.</p>
+          <input class="field" id="qrInput" value="https://openai.com" aria-label="QR 코드 내용">
+          <div class="demo-stage qr-stage" id="qrOutput"></div>
+          <button class="card-action" id="makeQr" type="button">QR 만들기 <span>↗</span></button>
+        </article>
+
+        <article class="demo-card wide" data-category="utility data" data-search="marked dompurify 마크다운 에디터 미리보기">
+          <div class="card-index">04</div><div class="card-head"><div><span class="category">UTILITY · TEXT</span><h3>마크다운 미리보기</h3></div><span class="lib-badge">Marked + DOMPurify</span></div>
+          <p>안전하게 정제된 마크다운 결과를 실시간으로 확인하세요.</p>
+          <div class="split-editor"><textarea id="markdownInput" aria-label="마크다운 입력">## Hello, JS!\n\n**아이디어**를 코드로 바꿔보세요.\n\n- 빠르게\n- 안전하게\n- 즐겁게 ✨</textarea><div id="markdownPreview" class="markdown-output"></div></div>
+        </article>
+
+        <article class="demo-card" data-category="data utility" data-search="papaparse csv 파서 테이블 데이터">
+          <div class="card-index">05</div><div class="card-head"><div><span class="category">DATA</span><h3>CSV 미니 분석기</h3></div><span class="lib-badge">Papa Parse</span></div>
+          <p>CSV 문장을 표로 변환하고 행 수를 계산합니다.</p>
+          <textarea class="mini-textarea" id="csvInput" aria-label="CSV 입력">name,score\nMina,92\nJoon,87\nAra,95</textarea>
+          <div id="csvOutput" class="table-output"></div>
+          <button class="card-action" id="parseCsv" type="button">CSV 분석 <span>→</span></button>
+        </article>
+
+        <article class="demo-card" data-category="utility data" data-search="cryptojs sha256 해시 암호화">
+          <div class="card-index">06</div><div class="card-head"><div><span class="category">SECURITY</span><h3>SHA-256 해시</h3></div><span class="lib-badge">CryptoJS</span></div>
+          <p>입력한 문장을 단방향 해시값으로 변환합니다.</p>
+          <input class="field" id="hashInput" value="codex playground" aria-label="해시할 문장">
+          <code class="hash-output" id="hashOutput">버튼을 눌러 생성</code>
+          <button class="card-action" id="makeHash" type="button">해시 생성 <span>⌁</span></button>
+        </article>
+
+        <article class="demo-card" data-category="utility" data-search="zxcvbn 비밀번호 강도 보안">
+          <div class="card-index">07</div><div class="card-head"><div><span class="category">SECURITY</span><h3>비밀번호 강도</h3></div><span class="lib-badge">zxcvbn</span></div>
+          <p>추측 난이도를 기준으로 비밀번호 강도를 진단합니다.</p>
+          <input class="field" id="passwordInput" type="password" placeholder="비밀번호 입력" aria-label="비밀번호">
+          <div class="strength-bars" id="strengthBars"><i></i><i></i><i></i><i></i></div>
+          <p class="microcopy" id="strengthText">아직 입력되지 않았어요.</p>
+        </article>
+
+        <article class="demo-card" data-category="utility" data-search="dayjs 상대 시간 날짜 계산">
+          <div class="card-index">08</div><div class="card-head"><div><span class="category">TIME</span><h3>상대 시간 계산</h3></div><span class="lib-badge">Day.js</span></div>
+          <p>선택한 날짜가 지금으로부터 언제인지 자연어로 표시합니다.</p>
+          <input class="field" id="relativeDate" type="date" aria-label="날짜 선택">
+          <div class="big-result" id="relativeOutput">날짜를 선택하세요</div>
+        </article>
+
+        <article class="demo-card wide" data-category="utility data" data-search="luxon 세계 시간 타임존 시계">
+          <div class="card-index">09</div><div class="card-head"><div><span class="category">TIME · LIVE</span><h3>월드 클록</h3></div><span class="lib-badge">Luxon</span></div>
+          <p>서울, 뉴욕, 런던, 도쿄의 현재 시간을 비교합니다.</p>
+          <div class="clock-grid" id="worldClocks"></div>
+        </article>
+
+        <article class="demo-card" data-category="visual creative" data-search="chroma.js 색상 팔레트 컬러 그라데이션">
+          <div class="card-index">10</div><div class="card-head"><div><span class="category">COLOR</span><h3>컬러 팔레트</h3></div><span class="lib-badge">Chroma.js</span></div>
+          <p>두 색 사이를 자연스럽게 보간한 팔레트를 만듭니다.</p>
+          <div class="color-pickers"><input id="colorA" type="color" value="#7c5cff"><input id="colorB" type="color" value="#22d3a7"></div>
+          <div class="palette" id="palette"></div>
+          <button class="card-action" id="makePalette" type="button">팔레트 갱신 <span>◒</span></button>
+        </article>
+
+        <article class="demo-card" data-category="motion visual" data-search="anime.js 애니메이션 오브젝트 모션">
+          <div class="card-index">11</div><div class="card-head"><div><span class="category">MOTION</span><h3>오비탈 모션</h3></div><span class="lib-badge">Anime.js</span></div>
+          <p>가속과 회전을 조합한 마이크로 인터랙션입니다.</p>
+          <div class="demo-stage motion-stage"><div class="anime-dot"></div><div class="anime-dot"></div><div class="anime-dot"></div></div>
+          <button class="card-action" id="playAnime" type="button">애니메이션 재생 <span>▶</span></button>
+        </article>
+
+        <article class="demo-card" data-category="motion visual" data-search="gsap 타임라인 애니메이션">
+          <div class="card-index">12</div><div class="card-head"><div><span class="category">MOTION</span><h3>GSAP 타임라인</h3></div><span class="lib-badge">GSAP</span></div>
+          <p>세 개의 블록이 순서대로 등장하는 타임라인입니다.</p>
+          <div class="demo-stage gsap-stage"><i></i><i></i><i></i></div>
+          <button class="card-action" id="playGsap" type="button">타임라인 재생 <span>▶</span></button>
+        </article>
+
+        <article class="demo-card" data-category="motion utility" data-search="typed.js 타이핑 효과 텍스트">
+          <div class="card-index">13</div><div class="card-head"><div><span class="category">TEXT · MOTION</span><h3>타이핑 메시지</h3></div><span class="lib-badge">Typed.js</span></div>
+          <p>짧은 문장들을 타자기처럼 반복 재생합니다.</p>
+          <div class="type-stage">We create <span id="typedTarget"></span></div>
+          <button class="card-action" id="restartTyped" type="button">다시 재생 <span>↻</span></button>
+        </article>
+
+        <article class="demo-card" data-category="motion data" data-search="countup 숫자 카운트 애니메이션">
+          <div class="card-index">14</div><div class="card-head"><div><span class="category">NUMBER</span><h3>숫자 카운터</h3></div><span class="lib-badge">CountUp.js</span></div>
+          <p>목표 숫자까지 매끄럽게 증가하는 카운터입니다.</p>
+          <div class="count-stage" id="countTarget">0</div>
+          <button class="card-action" id="startCount" type="button">카운트 시작 <span>↗</span></button>
+        </article>
+
+        <article class="demo-card" data-category="motion creative" data-search="canvas confetti 폭죽 파티클">
+          <div class="card-index">15</div><div class="card-head"><div><span class="category">DELIGHT</span><h3>컨페티 캐논</h3></div><span class="lib-badge">Canvas Confetti</span></div>
+          <p>클릭 한 번으로 화면에 축하 에너지를 더하세요.</p>
+          <div class="demo-stage celebration-stage">🎉<span>MAKE SOME NOISE</span></div>
+          <button class="card-action accent-action" id="fireConfetti" type="button">발사! <span>✦</span></button>
+        </article>
+
+        <article class="demo-card" data-category="utility data" data-search="sortablejs 드래그 정렬 리스트 칸반">
+          <div class="card-index">16</div><div class="card-head"><div><span class="category">PRODUCTIVITY</span><h3>드래그 우선순위</h3></div><span class="lib-badge">SortableJS</span></div>
+          <p>항목을 드래그해 오늘의 작업 순서를 정하세요.</p>
+          <ul class="sortable-list" id="sortableList"><li><b>01</b>아이디어 스케치 <span>⠿</span></li><li><b>02</b>프로토타입 제작 <span>⠿</span></li><li><b>03</b>사용자 테스트 <span>⠿</span></li></ul>
+        </article>
+
+        <article class="demo-card" data-category="utility" data-search="tippy.js 툴팁 도움말">
+          <div class="card-index">17</div><div class="card-head"><div><span class="category">UI</span><h3>스마트 툴팁</h3></div><span class="lib-badge">Tippy.js</span></div>
+          <p>버튼 위에 마우스를 올려 맥락 도움말을 확인하세요.</p>
+          <div class="demo-stage tooltip-stage"><button data-tippy-content="좋아요! 이 툴팁은 접근성 속성도 자동으로 관리해요.">Hover me</button><button data-tippy-content="다양한 위치와 테마를 설정할 수 있어요.">Another one</button></div>
+        </article>
+
+        <article class="demo-card" data-category="utility" data-search="sweetalert2 토스트 알림 모달">
+          <div class="card-index">18</div><div class="card-head"><div><span class="category">UI</span><h3>토스트 알림</h3></div><span class="lib-badge">SweetAlert2</span></div>
+          <p>작업 결과를 방해 없이 전달하는 미니 알림입니다.</p>
+          <div class="demo-stage toast-stage"><span>✓</span><div><b>저장 완료</b><small>변경사항이 반영됐어요.</small></div></div>
+          <button class="card-action" id="showToast" type="button">알림 테스트 <span>↗</span></button>
+        </article>
+
+        <article class="demo-card" data-category="utility" data-search="sweetalert2 확인 대화상자 모달 dialog">
+          <div class="card-index">19</div><div class="card-head"><div><span class="category">UI</span><h3>확인 대화상자</h3></div><span class="lib-badge">SweetAlert2</span></div>
+          <p>중요한 선택 전에 사용자 의도를 한 번 더 확인합니다.</p>
+          <div class="demo-stage decision-stage"><div>?</div><span>계속 진행할까요?</span></div>
+          <button class="card-action" id="showDialog" type="button">대화상자 열기 <span>↗</span></button>
+        </article>
+
+        <article class="demo-card wide" data-category="creative visual" data-search="p5.js 제너러티브 아트 캔버스 입자">
+          <div class="card-index">20</div><div class="card-head"><div><span class="category">CREATIVE CODING</span><h3>제너러티브 웨이브</h3></div><span class="lib-badge">p5.js</span></div>
+          <p>마우스 움직임에 반응하는 유기적인 점의 물결입니다.</p>
+          <div class="creative-canvas" id="p5Canvas"></div>
+          <button class="card-action" id="reseedP5" type="button">새로운 패턴 <span>✦</span></button>
+        </article>
+
+        <article class="demo-card" data-category="creative motion" data-search="matter.js 물리 엔진 중력 공 충돌">
+          <div class="card-index">21</div><div class="card-head"><div><span class="category">PHYSICS</span><h3>중력 놀이터</h3></div><span class="lib-badge">Matter.js</span></div>
+          <p>클릭한 위치에 물리 법칙을 따르는 공을 떨어뜨립니다.</p>
+          <div class="physics-stage" id="physicsStage"><span>클릭해서 공 추가</span></div>
+          <button class="card-action" id="resetPhysics" type="button">초기화 <span>↻</span></button>
+        </article>
+
+        <article class="demo-card" data-category="creative" data-search="tone.js 신시사이저 음악 사운드 오디오">
+          <div class="card-index">22</div><div class="card-head"><div><span class="category">AUDIO</span><h3>미니 신시사이저</h3></div><span class="lib-badge">Tone.js</span></div>
+          <p>네 개의 키로 간단한 멜로디를 연주해보세요.</p>
+          <div class="piano" id="piano"><button data-note="C4">C</button><button data-note="E4">E</button><button data-note="G4">G</button><button data-note="B4">B</button></div>
+          <p class="microcopy">브라우저 정책상 첫 클릭 후 소리가 납니다.</p>
+        </article>
+
+        <article class="demo-card wide" data-category="creative visual" data-search="three.js 3d webgl 오브젝트 씬">
+          <div class="card-index">23</div><div class="card-head"><div><span class="category">3D · WEBGL</span><h3>3D 크리스털</h3></div><span class="lib-badge">Three.js</span></div>
+          <p>드래그로 회전하고 포인터 움직임으로 빛을 탐색하세요.</p>
+          <div class="three-stage" id="threeStage"></div>
+        </article>
+
+        <article class="demo-card wide" data-category="visual data" data-search="leaflet 지도 서울 맵 위치 마커">
+          <div class="card-index">24</div><div class="card-head"><div><span class="category">MAP</span><h3>서울 스팟 맵</h3></div><span class="lib-badge">Leaflet</span></div>
+          <p>오픈 지도 위에서 서울의 크리에이티브 스팟을 둘러보세요.</p>
+          <div class="map-stage" id="mapStage"></div>
+        </article>
+
+        <article class="demo-card" data-category="utility data" data-search="mathjs 스마트 계산기 수학 수식">
+          <div class="card-index">25</div><div class="card-head"><div><span class="category">MATH</span><h3>스마트 계산기</h3></div><span class="lib-badge">math.js</span></div>
+          <p>복잡한 수식도 문자열 그대로 계산합니다.</p>
+          <input class="field" id="mathInput" value="sqrt(144) + 8 * 3" aria-label="계산 수식">
+          <div class="big-result" id="mathOutput">36</div>
+          <button class="card-action" id="calculateMath" type="button">계산하기 <span>=</span></button>
+        </article>
+
+        <article class="demo-card" data-category="data utility" data-search="lodash 데이터 랜덤 샘플 셔플">
+          <div class="card-index">26</div><div class="card-head"><div><span class="category">DATA</span><h3>아이디어 셔플러</h3></div><span class="lib-badge">Lodash</span></div>
+          <p>키워드를 무작위로 조합해 새로운 프로젝트를 제안합니다.</p>
+          <div class="idea-output" id="ideaOutput">AI × 음악 × 산책</div>
+          <button class="card-action" id="shuffleIdea" type="button">새 조합 <span>⤨</span></button>
+        </article>
+
+        <article class="demo-card" data-category="data utility" data-search="fuse.js 퍼지 검색 사람 디렉토리">
+          <div class="card-index">27</div><div class="card-head"><div><span class="category">SEARCH</span><h3>퍼지 팀 검색</h3></div><span class="lib-badge">Fuse.js</span></div>
+          <p>철자가 조금 달라도 가장 가까운 팀원을 찾습니다.</p>
+          <input class="field" id="fuzzyInput" placeholder="예: desiner" aria-label="팀 검색">
+          <div class="search-results" id="fuzzyResults"><span>Mina · Designer</span><span>Joon · Developer</span><span>Ara · Researcher</span></div>
+        </article>
+
+        <article class="demo-card" data-category="utility" data-search="validator.js 폼 이메일 url 검증">
+          <div class="card-index">28</div><div class="card-head"><div><span class="category">FORM</span><h3>입력값 검사기</h3></div><span class="lib-badge">Validator.js</span></div>
+          <p>이메일 형식을 입력하는 즉시 검사합니다.</p>
+          <input class="field" id="emailInput" placeholder="hello@example.com" aria-label="이메일 입력">
+          <div class="validation-state" id="emailState">이메일을 입력해주세요.</div>
+        </article>
+
+        <article class="demo-card" data-category="utility" data-search="clipboard api 복사 클립보드">
+          <div class="card-index">29</div><div class="card-head"><div><span class="category">BROWSER API</span><h3>한 번에 복사</h3></div><span class="lib-badge">Clipboard API</span></div>
+          <p>자주 쓰는 코드 조각을 클립보드에 바로 담습니다.</p>
+          <pre class="snippet"><code>const joy = () =&gt; '✨';</code></pre>
+          <button class="card-action" id="copySnippet" type="button">코드 복사 <span>▣</span></button>
+        </article>
+
+        <article class="demo-card" data-category="utility data" data-search="jspdf pdf 리포트 내보내기 다운로드">
+          <div class="card-index">30</div><div class="card-head"><div><span class="category">EXPORT</span><h3>PDF 리포트</h3></div><span class="lib-badge">jsPDF</span></div>
+          <p>현재 실험실 요약을 작은 PDF 파일로 내보냅니다.</p>
+          <div class="demo-stage pdf-stage"><span>PDF</span><div><b>JS Lab Report</b><small>30 experiments inside</small></div></div>
+          <button class="card-action accent-action" id="exportPdf" type="button">PDF 내보내기 <span>↓</span></button>
+        </article>
+      </div>
+
+      <div class="empty-state" id="emptyState" hidden><b>검색 결과가 없어요.</b><span>다른 키워드나 카테고리를 선택해보세요.</span></div>
+    </section>
+
+    <section class="about" id="about">
+      <p class="eyebrow"><span></span> HOW IT WORKS</p>
+      <h2>라이브러리는 도구,<br><em>경험은 당신의 것.</em></h2>
+      <div class="about-grid"><p>이 사이트는 별도 서버 없이 브라우저에서 실행됩니다. 각 카드는 하나의 아이디어를 짧고 명확한 상호작용으로 보여줍니다.</p><p>소스를 열어 조합을 바꾸고, 새로운 실험을 더해보세요. 작은 프로토타입은 좋은 제품의 가장 빠른 출발점입니다.</p></div>
+      <a class="primary-btn" href="#explore">다시 둘러보기 <span>↑</span></a>
+    </section>
+  </main>
+
+  <footer><a class="brand" href="#top"><span class="brand-mark">JS</span><span><strong>PLAYGROUND</strong><small>Made to experiment</small></span></a><p>HTML · CSS · JavaScript / 30 interactive experiments</p><button id="backToTop" type="button">TOP ↑</button></footer>
+
+  <div class="status-toast" id="statusToast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.3/dist/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.2.0/crypto-js.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/zxcvbn@4.4.2/dist/zxcvbn.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/dayjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/plugin/relativeTime.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/locale/ko.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3.5.0/build/global/luxon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chroma-js@2.6.0/chroma.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tippy.js@6/dist/tippy-bundle.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/matter-js@0.20.0/build/matter.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tone@15.0.4/build/Tone.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjs@14.0.1/lib/browser/math.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/validator@13.12.0/validator.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
